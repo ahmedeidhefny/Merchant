@@ -16,10 +16,10 @@
             android:id="@+id/nav_addPoint"
             android:icon="@drawable/addpoint"
             android:title="Add Point" />
-        <item
+       <!-- <item
             android:id="@+id/nav_report"
             android:icon="@drawable/report"
-            android:title="Report" />
+            android:title="Report" />-->
 
         <item
             android:id="@+id/nav_Blogout"

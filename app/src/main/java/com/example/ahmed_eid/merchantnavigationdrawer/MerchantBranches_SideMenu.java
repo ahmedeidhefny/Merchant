@@ -100,7 +100,7 @@ public class MerchantBranches_SideMenu extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.BranchContent_frame,
                     new Branch_Fragment_Points()).commit();
 
-        } else if (id == R.id.nav_report) {
+       // } else if (id == R.id.nav_report) {
 
         } else if (id == R.id.nav_Blogout) {
             Intent ino = new Intent(this,MerchantND.class);
