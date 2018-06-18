@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ahmed_eid.merchantnavigationdrawer">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="in.wptrafficanalyzer.locationingooglemapv2.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/merchant"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MerchantSignIn">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDsiveq2La8Bq-jkM1lUwQ0prTOlZAGynE" />
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".Search_Place" />
+
+        <activity
+            android:name=".MerchantND"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MerchantAddBranch" />
+        <activity
+            android:name=".BranchesSignIn"
+            android:label="BranchSignIn"
+            android:parentActivityName=".MerchantND" />
+        <activity
+            android:name=".MerchantBranches_SideMenu"
+            android:label="@string/title_activity_merchant_branches__side_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MerchantSignUp"
+            android:label="MerchantSignUp"
+            android:parentActivityName=".MerchantSignIn" />
+        <activity
+            android:name=".MerchantAddMenuItems"
+            android:label="Add Menu"
+            android:parentActivityName=".MerchantND" />
+        <activity
+            android:name=".MerchantAddMenu"
+            android:label="Add Menu"
+            android:parentActivityName=".MerchantND" />
+        <activity
+            android:name=".BranchAddOfferDiscount"
+            android:label="Add Offer"
+            android:parentActivityName=".MerchantBranches_SideMenu" />
+        <activity
+            android:name=".BranchAddOfferPoints"
+            android:label="Add Offer"
+            android:parentActivityName=".MerchantBranches_SideMenu" />
+        <activity android:name=".showOfferDetails" />
+        <activity android:name=".showOfferDiscountDetails" />
+        <activity android:name=".MenuItemDetails"></activity>
+    </application>
+
+</manifest>
