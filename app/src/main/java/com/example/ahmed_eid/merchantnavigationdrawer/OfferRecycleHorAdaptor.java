@@ -185,6 +185,7 @@ public class OfferRecycleHorAdaptor extends RecyclerView.Adapter<OfferRecycleHor
                 intent.putExtra("starDate2",starDateList_Dis.get(position));
                 intent.putExtra("endDate2",endDateList_Dis.get(position));
                 intent.putExtra("newPrice",newPrices_Dis.get(position));
+                intent.putExtra("offerDid",offerIdList_Dis.get(position));
                 context.startActivity(intent);
             }
         });

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".showOfferDiscountDetails">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -18,7 +18,16 @@
                 android:id="@+id/OIImage2"
                 android:src="@drawable/item"
                 />
-        </LinearLayout>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/OfferEditIcon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/editl"
+                />
+
+        </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

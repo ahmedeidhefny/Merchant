@@ -50,8 +50,8 @@ public class BranchAddOfferPoints extends AppCompatActivity {
 
     ImageButton pickerImage ;
     Bitmap bitmap ;
-    SimpleDateFormat dateFormat ;
-
+    private SimpleDateFormat dateFormat ;
+    private String encoded_image ="" ;
     RequestQueue requestQueue ;
     StringRequest request ;
     AlertDialog alertDialog;
@@ -175,6 +175,10 @@ public class BranchAddOfferPoints extends AppCompatActivity {
                 itemImgV.setImageBitmap(bitmap);
                 itemImgV.setVisibility(View.VISIBLE);
                 itemImgG.setVisibility(View.GONE);
+                if (bitmap != null)
+                {
+                    encoded_image = encoded_imageString(bitmap);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -218,7 +222,6 @@ public class BranchAddOfferPoints extends AppCompatActivity {
         }
         String stardate= ET_starD.getText().toString();
         String enddate= ET_endD.getText().toString();
-
 
         if (dateFormat.parse(stardate).after(dateFormat.parse(enddate)))
         {
@@ -278,7 +281,7 @@ public class BranchAddOfferPoints extends AppCompatActivity {
                 hashMap.put("points",pos);
                 hashMap.put("starDate2",star);
                 hashMap.put("endDate2",end);
-                hashMap.put("encoded_ImageString",encoded_imageString(bitmap));
+                hashMap.put("encoded_ImageString",encoded_image);
                 return  hashMap ;
             }
         } ;

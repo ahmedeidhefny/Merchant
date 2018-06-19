@@ -68,7 +68,9 @@
         <activity android:name=".showOfferDetails" />
         <activity android:name=".showOfferDiscountDetails" />
         <activity android:name=".MenuItemDetails" />
-        <activity android:name=".EditMenuItem"></activity>
+        <activity android:name=".EditMenuItem" />
+        <activity android:name=".EditOfferDiscount" />
+        <activity android:name=".EditOfferPoint"></activity>
     </application>
 
 </manifest>

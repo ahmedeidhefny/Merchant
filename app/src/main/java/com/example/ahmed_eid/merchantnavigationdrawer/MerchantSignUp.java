@@ -46,7 +46,7 @@ public class MerchantSignUp extends AppCompatActivity {
     AlertDialog alertDialog;
 
     private EditText ET_email, ET_password, ET_PlaceName;
-
+    private String encoded_image ="" ;
     private RequestQueue requestQueue;
     private StringRequest request;
     private final static String registerPlaceURL = "http://gp.sendiancrm.com/offerall/registerPlace.php";
@@ -126,7 +126,10 @@ public class MerchantSignUp extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri_path);
                 imageUploadedGane.setImageBitmap(bitmap);
                 imageUploadedGane.setVisibility(View.VISIBLE);
-               // Toast.makeText(this, encoded_imageString(bitmap), Toast.LENGTH_SHORT).show();
+                if (bitmap != null)
+                {
+                    encoded_image = encoded_imageString(bitmap);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -184,7 +187,7 @@ public class MerchantSignUp extends AppCompatActivity {
                 hashMap.put("password",Ppassword);
                 hashMap.put("placeName",pName);
                 hashMap.put("category_id", ""+spinner_position);
-                hashMap.put("encoded_ImageString",encoded_imageString(bitmap));
+                hashMap.put("encoded_ImageString",encoded_image);
                 return hashMap;
             }
         };

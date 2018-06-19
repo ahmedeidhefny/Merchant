@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditOfferDiscount">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLoffer2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:contentDescription="@string/desc"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/circle"
+                            android:padding="10dp"
+                            android:src="@drawable/offer"
+                            android:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Edit Offer"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageViewe"
+                        android:contentDescription="@string/desc"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/linearLoffer2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-10dp"
+                        android:rotation="45"
+                        android:src="@drawable/square" />
+
+
+
+                    <LinearLayout
+                        android:id="@+id/container_linearx1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/imageViewe"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="30dp"
+                        >
+
+                        <EditText
+                            android:id="@+id/EofferItemNameDis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextstyle"
+                            android:hint="Item Name"
+                            android:inputType="text"
+                            android:textSize="15sp" />
+                        <EditText
+                            android:id="@+id/EOfferItemTypeDis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextstyle"
+                            android:hint="Item Type"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="10dp"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="photo :"
+                                android:textSize="17sp"
+                                android:layout_weight="4"
+                                android:layout_marginTop="20dp"
+                                />
+
+                            <ImageButton
+                                android:id="@+id/EPickImageOfferDis"
+                                android:contentDescription="@string/desc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:layout_weight="2"
+                                android:backgroundTint="@color/white"
+                                app:srcCompat="@drawable/upload_image" />
+
+                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/EshowUploadedofferDisG"
+                            android:layout_width="match_parent"
+                            android:contentDescription="@string/desc"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:contextClickable="false"
+                            android:layout_marginTop="15dp"
+                            android:visibility="gone"
+                            />
+
+                        <ImageView
+                            android:id="@+id/EshowUploadedofferDis"
+                            android:layout_width="match_parent"
+                            android:contentDescription="@string/desc"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:contextClickable="false"
+                            android:layout_marginTop="15dp"
+                            android:tint="@color/uploadmenu"
+                            app:srcCompat="@drawable/offer" />
+
+                        <EditText
+                            android:id="@+id/EitemDis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextstyle"
+                            android:hint="Discount"
+                            android:inputType="number"
+                            android:layout_marginTop="10dp"
+                            android:textSize="15sp" />
+                        <EditText
+                            android:id="@+id/EitemPrice2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextstyle"
+                            android:hint="Price"
+                            android:inputType="number"
+                            android:layout_marginTop="10dp"
+                            android:textSize="15sp" />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            >
+                            <EditText
+                                android:id="@+id/EofferstarDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextstyle"
+                                android:hint="Star Date"
+                                android:inputType="text"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Ecal_star2"
+                                android:src="@drawable/date"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            >
+                            <EditText
+                                android:id="@+id/EofferendDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextstyle"
+                                android:hint="End Date"
+                                android:inputType="text"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Ecal_end2"
+                                android:src="@drawable/date"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                />
+
+
+                        </RelativeLayout>
+
+
+
+                        <Button
+                            android:id="@+id/btn_EditOfferDis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="30dp"
+                            android:background="@color/colorPrimary"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Edit Offer"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

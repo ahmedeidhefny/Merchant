@@ -1,7 +1,9 @@
 package com.example.ahmed_eid.merchantnavigationdrawer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +15,7 @@ import java.net.URL;
 public class showOfferDetails extends AppCompatActivity {
 
     TextView TV_starDate,TV_endDate,TV_title,TV_type,TV_price,TV_points ;
-    ImageView Img_ImageOffer;
+    ImageView Img_ImageOffer,editOfferP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,16 +27,18 @@ public class showOfferDetails extends AppCompatActivity {
         TV_price = (TextView) findViewById(R.id.Oprice);
         TV_points = (TextView) findViewById(R.id.numpoints);
         Img_ImageOffer =(ImageView)findViewById(R.id.OIImage) ;
+        editOfferP =(ImageView)findViewById(R.id.OfferEditIcon2) ;
 
         Bundle b = getIntent().getExtras();
 
-        String starDate = b.getString("starDate");
-        String endDate = b.getString("endDate");
+        final String starDate = b.getString("starDate");
+        final String endDate = b.getString("endDate");
         String imageURL = b.getString("OfferImage");
-        String title = b.getString("title");
-        String type = b.getString("type");
-        Float price = b.getFloat("price");
-        int points = b.getInt("points");
+        final String title = b.getString("title");
+        final String type = b.getString("type");
+        final Float price = b.getFloat("price");
+        final int points = b.getInt("points");
+        final int offerPId = b.getInt("offerPid");
 
 
         TV_starDate.setText(starDate);
@@ -50,6 +54,22 @@ public class showOfferDetails extends AppCompatActivity {
                 .asBitmap()
                 .load(imageURL)
                 .into(Img_ImageOffer);
+
+
+        editOfferP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(),EditOfferPoint.class);
+                in.putExtra("ti2",title);
+                in.putExtra("ty2",type);
+                in.putExtra("pr2",price);
+                in.putExtra("poin",points);
+                in.putExtra("str2",starDate);
+                in.putExtra("end2",endDate);
+                in.putExtra("id2",offerPId);
+                startActivity(in);
+            }
+        });
 
 
     }
