@@ -2,6 +2,7 @@ package com.example.ahmed_eid.merchantnavigationdrawer;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -32,13 +33,18 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BranchAddOfferDiscount extends AppCompatActivity {
 
     EditText ET_title,ET_type,ET_price,ET_dis,ET_starD,ET_endD;
+
     Button btn_addOfferDis ;
     Bitmap bitmap ;
 
@@ -47,6 +53,7 @@ public class BranchAddOfferDiscount extends AppCompatActivity {
     private int mMonth;
     private int mDay;
     ImageButton pickerImage ;
+    SimpleDateFormat dateFormat ;
 
     RequestQueue requestQueue ;
     StringRequest request ;
@@ -72,6 +79,8 @@ public class BranchAddOfferDiscount extends AppCompatActivity {
         calImgStar = findViewById(R.id.cal_star2);
         calImgEnd = findViewById(R.id.cal_end2);
 
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         btn_addOfferDis =findViewById(R.id.btn_addOfferDis);
 
         requestQueue = Volley.newRequestQueue(this) ;
@@ -87,14 +96,18 @@ public class BranchAddOfferDiscount extends AppCompatActivity {
         btn_addOfferDis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validate()) {
-                    String title = ET_title.getText().toString();
-                    String type = ET_type.getText().toString();
-                    String price = ET_price.getText().toString();
-                    String discount = ET_dis.getText().toString();
-                    String star = ET_starD.getText().toString();
-                    String end = ET_endD.getText().toString();
-                    addOfferItemDB(title, type, price,discount,star,end);
+                try {
+                    if (validate()) {
+                        String title = ET_title.getText().toString();
+                        String type = ET_type.getText().toString();
+                        String price = ET_price.getText().toString();
+                        String discount = ET_dis.getText().toString();
+                        String star = ET_starD.getText().toString();
+                        String end = ET_endD.getText().toString();
+                        addOfferItemDB(title, type, price,discount,star,end);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -173,9 +186,10 @@ public class BranchAddOfferDiscount extends AppCompatActivity {
         return Base64.encodeToString(bytes_image, Base64.DEFAULT);
     }
 
-    public boolean validate() {
+    public boolean validate() throws ParseException {
 
         boolean valid = true;
+
         if(ET_title.getText().toString().matches("")||ET_title.length()>32){
             ET_title.setError("Enter Valid offer Name");
             valid=false;
@@ -198,6 +212,25 @@ public class BranchAddOfferDiscount extends AppCompatActivity {
         }
         if(ET_endD.getText().toString().matches("")){
             ET_endD.setError("Enter Valid end Date");
+            valid=false;
+        }
+         //hiden code how to convert from string to date
+        //DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
+        //Date starDate = format.parse(Sratdate);
+        //Date endDate = format.parse(enddate);
+
+        String stardate= ET_starD.getText().toString();
+        String enddate= ET_endD.getText().toString();
+
+        if (dateFormat.parse(stardate).after(dateFormat.parse(enddate)))
+        {
+
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Star Date After End Date Not Valid !"+"\n"+"Please..You Must Edit ^_^");
+            dlgAlert.setTitle("Attention! ");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
             valid=false;
         }
 

@@ -101,6 +101,7 @@ public class MenuRecycleHorAdaptor extends RecyclerView.Adapter<MenuRecycleHorAd
                 intent.putExtra("itemtitle",titles.get(position));
                 intent.putExtra("itemmark",marks.get(position));
                 intent.putExtra("itemPrice",prices.get(position));
+                intent.putExtra("itemId",itemsID.get(position));
                 context.startActivity(intent);
             }
         });

@@ -128,7 +128,6 @@ public class MerchantSignIn extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), MerchantND.class);
                         startActivity(intent);
-                         MerchantEditNavHeader header = new MerchantEditNavHeader();
                         alertDialog.setMessage("Welcome:  "+sharedPreferences.getString("PName",
                                 null));
                         alertDialog.show();

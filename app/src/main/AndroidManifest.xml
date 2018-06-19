@@ -67,7 +67,8 @@
             android:parentActivityName=".MerchantBranches_SideMenu" />
         <activity android:name=".showOfferDetails" />
         <activity android:name=".showOfferDiscountDetails" />
-        <activity android:name=".MenuItemDetails"></activity>
+        <activity android:name=".MenuItemDetails" />
+        <activity android:name=".EditMenuItem"></activity>
     </application>
 
 </manifest>

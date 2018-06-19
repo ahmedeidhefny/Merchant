@@ -33,6 +33,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +50,7 @@ public class BranchAddOfferPoints extends AppCompatActivity {
 
     ImageButton pickerImage ;
     Bitmap bitmap ;
+    SimpleDateFormat dateFormat ;
 
     RequestQueue requestQueue ;
     StringRequest request ;
@@ -74,7 +77,7 @@ public class BranchAddOfferPoints extends AppCompatActivity {
         calImgStar = findViewById(R.id.cal_star);
         calImgEnd = findViewById(R.id.cal_end);
         btn_addOfferpoints =findViewById(R.id.btn_addOfferPoint);
-
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         requestQueue = Volley.newRequestQueue(this) ;
         alertDialog = new android.app.AlertDialog.Builder(this).create();
@@ -91,14 +94,18 @@ public class BranchAddOfferPoints extends AppCompatActivity {
         btn_addOfferpoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validate()) {
-                    String title = ET_title.getText().toString();
-                    String type = ET_type.getText().toString();
-                    String price = ET_price.getText().toString();
-                    String pos = ET_points.getText().toString();
-                    String star = ET_starD.getText().toString();
-                    String end = ET_endD.getText().toString();
-                    addOfferItemPointsDB(title, type, price,pos,star,end);
+                try {
+                    if (validate()) {
+                        String title = ET_title.getText().toString();
+                        String type = ET_type.getText().toString();
+                        String price = ET_price.getText().toString();
+                        String pos = ET_points.getText().toString();
+                        String star = ET_starD.getText().toString();
+                        String end = ET_endD.getText().toString();
+                        addOfferItemPointsDB(title, type, price,pos,star,end);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -182,7 +189,7 @@ public class BranchAddOfferPoints extends AppCompatActivity {
     }
 
 
-    public boolean validate() {
+    public boolean validate() throws ParseException {
 
         boolean valid = true;
         if(ET_title.getText().toString().matches("")||ET_title.length()>32){
@@ -202,11 +209,26 @@ public class BranchAddOfferPoints extends AppCompatActivity {
             valid=false;
         }
         if(ET_starD.getText().toString().matches("")){
-            ET_price.setError("Enter Valid star Date");
+            ET_starD.setError("Enter Valid star Date");
             valid=false;
         }
         if(ET_endD.getText().toString().matches("")){
             ET_endD.setError("Enter Valid end Date");
+            valid=false;
+        }
+        String stardate= ET_starD.getText().toString();
+        String enddate= ET_endD.getText().toString();
+
+
+        if (dateFormat.parse(stardate).after(dateFormat.parse(enddate)))
+        {
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Star Date After End Date Not Valid !"+"\n"+"Please..You Must Edit ^_^");
+            dlgAlert.setTitle("Attention! ");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+
             valid=false;
         }
 

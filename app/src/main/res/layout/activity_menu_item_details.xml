@@ -11,17 +11,27 @@
     android:id="@+id/linearItemDClick"
     tools:context=".MenuItemDetails">
 
-        <LinearLayout
+            <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/imageItem"
-                android:src="@drawable/item"
-                />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/imageItem"
+                    android:src="@drawable/item"
+                    />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/itemEdit"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/editl"
+                    />
+
+        </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
