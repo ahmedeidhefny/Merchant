@@ -56,6 +56,7 @@ public class MerchantSignUp extends AppCompatActivity {
 
     private int spinner_position = 1;
     private Spinner spinner;
+    int i=0 ;
 
     ArrayList<String> categoriesName =new ArrayList<>();
     ArrayList<Integer> categoriesId= new ArrayList<>();
