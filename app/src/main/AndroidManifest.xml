@@ -70,7 +70,9 @@
         <activity android:name=".MenuItemDetails" />
         <activity android:name=".EditMenuItem" />
         <activity android:name=".EditOfferDiscount" />
-        <activity android:name=".EditOfferPoint"></activity>
+        <activity android:name=".EditOfferPoint" />
+        <activity android:name=".EditMershantProfile" />
+        <activity android:name=".EditBranchProfile"></activity>
     </application>
 
 </manifest>

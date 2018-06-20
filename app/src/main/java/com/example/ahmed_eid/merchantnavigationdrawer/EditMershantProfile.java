@@ -1,21 +1,17 @@
 package com.example.ahmed_eid.merchantnavigationdrawer;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.text.InputType;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -40,19 +36,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MerchantSignUp extends AppCompatActivity {
+public class EditMershantProfile extends AppCompatActivity {
 
     private ImageView imageUpload, imageUploadedGane;
     private Bitmap bitmap;
     AlertDialog alertDialog;
 
     private EditText ET_email, ET_password, ET_PlaceName;
+    TextView ts ;
     private String encoded_image ="" ;
     private RequestQueue requestQueue;
     private StringRequest request;
-    private final static String registerPlaceURL = "http://gp.sendiancrm.com/offerall/registerPlace2.php";
+    private final static String editPlaceURL = "http://gp.sendiancrm.com/offerall/editPlaceProfile.php";
     private  final String GetCategoryURL = "http://gp.sendiancrm.com/offerall/getCategory.php";
-    Button btn_register;
+    Button btn_EditProfile;
 
     private int spinner_position = 1;
     private Spinner spinner;
@@ -60,52 +57,41 @@ public class MerchantSignUp extends AppCompatActivity {
     ArrayList<String> categoriesName =new ArrayList<>();
     ArrayList<Integer> categoriesId= new ArrayList<>();
 
+    int placeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_merchant_sign_up);
-
-        spinner = (Spinner) findViewById(R.id.spinner);
-        ET_email = (EditText) findViewById(R.id.Pemail);
-        ET_password = (EditText) findViewById(R.id.Ppassword);
-        ET_PlaceName = (EditText) findViewById(R.id.PbrandName);
-        imageUpload = (ImageView) findViewById(R.id.PickImagePlace);
-        imageUploadedGane = (ImageView) findViewById(R.id.placeUploadedImage);
-        btn_register = (Button) findViewById(R.id.button_signup);
+        setContentView(R.layout.activity_edit_mershant_profile);
+        spinner = (Spinner) findViewById(R.id.Espinner);
+        ET_email = (EditText) findViewById(R.id.EPemail);
+        ET_password = (EditText) findViewById(R.id.EPpassword);
+        ET_PlaceName = (EditText) findViewById(R.id.EPbrandName);
+        imageUpload = (ImageView) findViewById(R.id.EPickImagePlace);
+        imageUploadedGane = (ImageView) findViewById(R.id.EplaceUploadedImage);
+        btn_EditProfile = (Button) findViewById(R.id.Ebutton_signup);
+        ts = findViewById(R.id.tvsp);
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         alertDialog = new AlertDialog.Builder(this).create();
 
-        //GetCategoryFromDB categoryFromDB = new GetCategoryFromDB(this);
-        ///categoriesName = categoryFromDB.getCategoryFromDBs();
+        Bundle b = getIntent().getExtras();
+        final String name = b.getString("n");
+        final String catname = b.getString("cn");
+        final String email = b.getString("em");
+        final String password = b.getString("pa");
+        placeId = b.getInt("pid");
+
+        ET_email.setText(email);
+        ET_password.setText(password);
+        ET_PlaceName.setText(name);
+        ts.setText(catname);
+
         getCategoriesDB();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,categoriesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-       /*  for (int i=0 ; i<categoriesName.size();i++)
-        {
-            if (categoriesName.get(i).equals(betterSpinner.getText()))
-            {
-                Toast.makeText(this, "tmam", Toast.LENGTH_SHORT).show();
-            }
-
-        }*/
-      spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              Toast.makeText(getApplicationContext(), "merci"+categoriesId.get(position),
-                      Toast.LENGTH_LONG).show();
-          }
-
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {
-
-          }
-      });
-
 
         imageUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,22 +100,33 @@ public class MerchantSignUp extends AppCompatActivity {
                 Intent intent_uploadImage = new Intent();
                 intent_uploadImage.setType("image/*");
                 intent_uploadImage.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent_uploadImage, 777);
+                startActivityForResult(intent_uploadImage, 837);
 
             }
         });
 
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()) {
                     String pName = ET_PlaceName.getText().toString();
                     String pEmail = ET_email.getText().toString();
                     String ppassword = ET_password.getText().toString();
-                    register_Place(pName, pEmail, ppassword);
+                    edit_Place(pName, pEmail, ppassword);
                 }
 
+
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ts.setText(""+parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -137,7 +134,7 @@ public class MerchantSignUp extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 777 && resultCode == RESULT_OK && data != null) {
+        if (requestCode == 837 && resultCode == RESULT_OK && data != null) {
             Uri uri_path = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri_path);
@@ -160,9 +157,9 @@ public class MerchantSignUp extends AppCompatActivity {
         return Base64.encodeToString(bytes_image, Base64.DEFAULT);
     }
 
-    public void register_Place(final String pName, final String PEmail, final String Ppassword) {
+    public void edit_Place(final String pName, final String PEmail, final String Ppassword) {
 
-        request = new StringRequest(Request.Method.POST, registerPlaceURL, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.POST, editPlaceURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -172,9 +169,8 @@ public class MerchantSignUp extends AppCompatActivity {
                     {
                         Toast.makeText(getApplicationContext(), ""+jsonObject.get("success"),
                                 Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(),MerchantSignIn.class);
+                        Intent intent = new Intent(getApplicationContext(),MerchantND.class);
                         startActivity(intent);
-                        alertDialog.setMessage("Now ^_^ You Can Login..");
                         alertDialog.show();
 
                     }else if (jsonObject.names().get(0).equals("error"))
@@ -200,11 +196,12 @@ public class MerchantSignUp extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("email",PEmail);
-                hashMap.put("password",Ppassword);
-                hashMap.put("placeName",pName);
-                hashMap.put("category_id", ""+spinner_position);
-                hashMap.put("encoded_ImageString",encoded_image);
+                hashMap.put("place_id",""+placeId);
+                hashMap.put("Eemail",PEmail);
+                hashMap.put("Epassword",Ppassword);
+                hashMap.put("EplaceName",pName);
+                hashMap.put("Ecategory_id", ""+spinner_position);
+                hashMap.put("Eencoded_ImageString",encoded_image);
                 return hashMap;
             }
         };
@@ -273,4 +270,5 @@ public class MerchantSignUp extends AppCompatActivity {
         requestQueue.add(request2);
 
     }
+
 }

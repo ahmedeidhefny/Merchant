@@ -19,7 +19,7 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="?attr/actionBarTabTextStyle"
                 app:expandedTitleMarginEnd="32dp"
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -56,15 +56,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
                     android:orientation="vertical"
                     android:id="@+id/edit">
 
                     <ImageButton
-                        android:id="@+id/editProfile"
+                        android:id="@+id/editProfile2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:padding="20dp"
                         android:background="@null"
                         android:src="@drawable/editl"
                         android:tint="@color/colorAccent" />
@@ -91,20 +91,19 @@
                                 android:layout_column="1"
                                 android:layout_marginTop="4dp"
                                 android:padding="10dp"
-                                android:text="Description :"
+                                android:text="Address :"
                                 android:textColor="#3797CF"
                                 android:textSize="14sp"
                                 android:textStyle="normal" />
 
                             <TextView
-                                android:id="@+id/desc"
+                                android:id="@+id/addrs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_column="2"
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="20"
                                 android:padding="10dp"
-                                android:text="Zara is a Spanish clothing and accessories retailer based in Arteixo"
                                 android:textColor="#aaa69d"
                                 android:textSize="14sp"
                                 android:textStyle="normal" />
@@ -120,50 +119,23 @@
                                 android:layout_column="1"
                                 android:layout_marginTop="4dp"
                                 android:padding="10dp"
-                                android:text="Email:"
+                                android:text="Password:"
                                 android:textColor="#3797CF"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
 
                             <TextView
-                                android:id="@+id/emaillo"
+                                android:id="@+id/passw"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_column="2"
                                 android:layout_marginTop="4dp"
                                 android:padding="10dp"
-                                android:text="zora@gmail,com"
                                 android:textColor="#aaa69d"
                                 android:textSize="14sp"
                                 android:textStyle="normal" />
                         </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="1"
-                                android:layout_marginTop="4dp"
-                                android:padding="10dp"
-                                android:text="Category :"
-                                android:textColor="#3797CF"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
-                            <TextView
-                                android:id="@+id/categ"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_marginTop="4dp"
-                                android:padding="10dp"
-                                android:text="Clothes"
-                                android:textColor="#aaa69d"
-                                android:textSize="14sp"
-                                android:textStyle="normal" />
-                        </TableRow>
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">

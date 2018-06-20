@@ -1,6 +1,7 @@
 package com.example.ahmed_eid.merchantnavigationdrawer;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,17 +33,21 @@ import java.util.Map;
 public class Branch_Fragment_Profile extends Fragment {
 
     View myView ;
-    TextView TV_email,TV_Descript,TV_cat,TV_phone;
+    TextView TV_password,TV_adress,TV_phone;
     CollapsingToolbarLayout collapsingToolbarLayout ;
+    ImageButton btn_edit ;
+    ImageView img;
 
     RequestQueue requestQueue ;
     StringRequest request ;
-    private  final String GetOneCategoryURL = "http://gp.sendiancrm.com/offerall/getCategoryById.php";
 
-    private  String pName ;
+    private  final String getBranchURL = "http://gp.sendiancrm.com/offerall/getBranchData.php";
+
+   /* private  String pName ;
     private  int categoryId;
     private String email;
-    private String photo,phone;
+    private String photo,phone;*/
+    int branchId;
 
     SharedPreferences sharedPreferences ;
 
@@ -51,55 +57,64 @@ public class Branch_Fragment_Profile extends Fragment {
         myView = inflater.inflate(R.layout.branch_fragment_profile,container,false);
 
         collapsingToolbarLayout = myView.findViewById(R.id.collapsing_toolbar);
-        ImageView img = myView.findViewById(R.id.pImg2);
-        TV_cat = myView.findViewById(R.id.categ);
-        TV_Descript = myView.findViewById(R.id.desc);
-        TV_email = myView.findViewById(R.id.emaillo);
+        img = myView.findViewById(R.id.pImg2);
+        TV_password = myView.findViewById(R.id.passw);
+        TV_adress = myView.findViewById(R.id.addrs);
         TV_phone = myView.findViewById(R.id.phone);
+        btn_edit = myView.findViewById(R.id.editProfile2);
 
         requestQueue = Volley.newRequestQueue(getActivity()) ;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if(sharedPreferences.getBoolean("logged in",false)){
-
-            //pName = sharedPreferences.getString("PName","place Name");
-            categoryId = sharedPreferences.getInt("PcategoryId",1);
-            //email = sharedPreferences.getString("PEmail","Email");
-            photo = sharedPreferences.getString("Pphoto",null);
-        }
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (sharedPreferences.getBoolean("loginBranch",false)){
-            pName = sharedPreferences.getString("BName","name");
-            phone =sharedPreferences.getString("BPhone",null);
-            email = sharedPreferences.getString("","email");
-            //photo = sharedPreferences.getString("BPhoto",null);
-        }
-        getOneCategory(categoryId);
-        TV_email.setText(email);
-        TV_phone.setText(phone);
-        collapsingToolbarLayout.setTitle(pName);
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(photo)
-                .into(img);
 
+            branchId = sharedPreferences.getInt("BId",0);
+            //Toast.makeText(getActivity(), ""+branchId, Toast.LENGTH_SHORT).show();
+        }
+
+        getbranchDB(branchId);
         return myView;
     }
 
-    public  void getOneCategory(final int catId){
 
-        request =new StringRequest(Request.Method.POST,GetOneCategoryURL, new Response.Listener<String>() {
+    public  void getbranchDB(final int branchid){
+
+        request =new StringRequest(Request.Method.POST,getBranchURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray categories = jsonObject.getJSONArray("categoryDB");
+                    JSONArray categories = jsonObject.getJSONArray("branchData");
                     JSONObject category = categories.getJSONObject(0);
-                    String categoryName = (String)category.getString("Name");
-                    String categorDes = (String)category.getString("Discription");
-                    TV_cat.setText(categoryName);
-                    TV_Descript.setText(categorDes);
+                    final String name = (String)category.getString("Branch_name");
+                    final String pass = (String)category.getString("Branch_Password");
+                    final String add = (String)category.getString("Address");
+                    final String phone = (String)category.getString("Branch_phone");
+                    final String imge = (String)category.getString("Branch_image");
+                    TV_password.setText(pass);
+                    TV_adress.setText(add);
+                    TV_phone.setText(phone);
+                    collapsingToolbarLayout.setTitle(name);
+                    Glide.with(getActivity())
+                            .asBitmap()
+                            .load(imge)
+                            .into(img);
+                    btn_edit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent in = new Intent(getActivity(),EditBranchProfile.class);
+                            in.putExtra("bn",name);
+                            in.putExtra("adds",add);
+                            in.putExtra("pas",pass);
+                            in.putExtra("phon",phone);
+                            in.putExtra("im",imge);
+                            in.putExtra("bid",branchId);
+                            startActivity(in);
+                        }
+                    });
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -113,7 +128,7 @@ public class Branch_Fragment_Profile extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap hashMap = new HashMap();
-                hashMap.put("catId",""+catId);
+                hashMap.put("branchID",""+branchid);
                 return  hashMap ;
             }
         };

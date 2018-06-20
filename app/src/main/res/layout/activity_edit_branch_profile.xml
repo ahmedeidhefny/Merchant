@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azure"
-    tools:context=".MerchantSignUp">
-
+    tools:context=".EditBranchProfile">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +29,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/linearL1"
+                    android:id="@+id/linearLaddB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
@@ -46,7 +43,7 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/circle"
                         android:padding="10dp"
-                        android:src="@drawable/register"
+                        android:src="@drawable/location"
                         android:tint="@color/white" />
 
                     <TextView
@@ -55,17 +52,17 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="SIGN UP"
+                        android:text="Edit Branch"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageViewaddB"
                     android:contentDescription="@string/desc"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_below="@+id/linearL1"
+                    android:layout_below="@+id/linearLaddB"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="-10dp"
                     android:rotation="45"
@@ -74,24 +71,35 @@
 
 
                 <LinearLayout
-                    android:id="@+id/container_linear"
+                    android:id="@+id/container_linear2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_below="@+id/imageView1"
+                    android:layout_below="@+id/imageViewaddB"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="30dp"
                     >
 
                     <EditText
-                        android:id="@+id/PbrandName"
+                        android:id="@+id/EbranchName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittextstyle"
-                        android:hint="Brand Name"
+                        android:hint="Branch Name"
                         android:inputType="text"
                         android:textSize="15sp" />
+                    <EditText
+                        android:id="@+id/EbranchPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextstyle"
+                        android:hint="Branch Phone"
+                        android:inputType="phone"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp" />
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -104,85 +112,77 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="photo :"
+                            android:text="Location :"
                             android:textSize="17sp"
                             android:layout_weight="4"
+                            android:layout_marginTop="12dp"
+                            />
+
+                        <ImageButton
+                            android:id="@+id/EPickLocation"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="2"
+                            android:layout_marginRight="20dp"
+                            android:backgroundTint="@color/white"
+                            app:srcCompat="@drawable/location"
+
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="25 read Location"
+                        android:textSize="12sp"
+                        android:id="@+id/Elocation"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        />
+                <!--    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="15dp"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="photo :"
+                            android:textSize="17sp"
+                            android:layout_weight="1"
                             android:layout_marginTop="20dp"
                             />
 
                         <ImageButton
-                            android:id="@+id/PickImagePlace"
+                            android:id="@+id/branchImage"
                             android:contentDescription="@string/desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="-5dp"
-                            android:layout_weight="2"
+                            android:layout_weight="4"
+                            android:layout_gravity="end"
                             android:backgroundTint="@color/white"
                             app:srcCompat="@drawable/upload_image" />
 
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/placeUploadedImage"
-                        android:layout_width="match_parent"
-                        android:contentDescription="@string/desc"
-                        android:layout_height="200dp"
-                        android:visibility="gone"
-                        android:layout_marginBottom="10dp"
-                        android:adjustViewBounds="true"
-                        android:contextClickable="false"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/profile_pic" />
-
-                    <LinearLayout
+                    </LinearLayout> -->
+                    <EditText
+                        android:id="@+id/EbranchPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:background="@drawable/edittextstyle"
+                        android:hint="Branch Password"
+                        android:inputType="textPassword"
                         android:layout_marginTop="15dp"
-                        android:orientation="vertical"
-                        >
-
-                      <Spinner
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/spinner"
-                          android:layout_marginRight="10dp"
-                          >
-
-                      </Spinner>
-
-                        <EditText
-                            android:id="@+id/Pemail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="15sp"
-                            android:layout_marginTop="15dp"
-                            android:background="@drawable/edittextstyle"
-                            android:ems="10"
-                            android:hint="Email"
-                            android:inputType="textEmailAddress" />
-
-
-
-                        <EditText
-                            android:id="@+id/Ppassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:textSize="15sp"
-                            android:background="@drawable/edittextstyle"
-                            android:ems="10"
-                            android:hint="PassWord"
-                            android:inputType="textPassword" />
-                    </LinearLayout>
-
+                        android:textSize="15sp" />
 
 
                     <Button
-                        android:id="@+id/button_signup"
+                        android:id="@+id/btn_editBranch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
@@ -191,7 +191,7 @@
                         android:layout_marginTop="30dp"
                         android:background="@color/colorPrimary"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Sign Up"
+                        android:text="Edit Branch"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -200,5 +200,4 @@
     </android.support.v7.widget.CardView>
 
 
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

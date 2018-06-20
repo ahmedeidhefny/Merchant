@@ -50,8 +50,9 @@ public class BranchAddOfferPoints extends AppCompatActivity {
 
     ImageButton pickerImage ;
     Bitmap bitmap ;
-    private SimpleDateFormat dateFormat ;
     private String encoded_image ="" ;
+    private SimpleDateFormat dateFormat ;
+
     RequestQueue requestQueue ;
     StringRequest request ;
     AlertDialog alertDialog;
